@@ -5,7 +5,9 @@ from .validators import validate_audio_file
 
 class Category(models.Model):
     title = models.CharField(max_length=255)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(upload_to='images/authors', blank=True)
+    slug = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.title
@@ -13,7 +15,7 @@ class Category(models.Model):
 
 class Author(models.Model):
     title = models.CharField(max_length=255)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, blank=True)
     image = models.ImageField(upload_to='images/authors', blank=True)
     slug = models.CharField(max_length=200, blank=True)
 
@@ -23,7 +25,9 @@ class Author(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length=30)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(upload_to='images/authors', blank=True)
+    slug = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.title
