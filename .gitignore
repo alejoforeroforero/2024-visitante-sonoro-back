@@ -1,0 +1,100 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+
+# Local virtualenv
+venv/
+ENV/
+env/
+.venv/
+ENV/
+env.bak/
+env.bak/
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# macOS files
+.DS_Store
+
+# dotenv
+.env
+
+# Database
+*.sqlite3
+db.sqlite3
+
+# Media
+/media
+
+# Static files
+/static
+
+# Migrations
+*/migrations/__pycache__/
+*/migrations/*.pyc
+*/migrations/*.pyo
+*/migrations/*.py[cod]
+*/migrations/*_cache/
+
+# Ignore settings that might be environment-specific
+settings_local.py
+
+# Ignore compiled node modules
+node_modules/
+
+# Ignore pip files
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Celery
+celerybeat-schedule
+
+# Sage
+*.sage.py
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# coverage
+.coverage
+coverage.xml
+htmlcov/
+
+# pytest
+.cache/
+
+# Environments
+.pyenv/
+.python-version
+
+# Testing
+.tox/
+.nox/
+
+# jupyter notebook
+.ipynb_checkpoints
+
+# End of example
