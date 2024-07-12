@@ -22,7 +22,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ['id', 'title', 'description', 'recordings']
+        fields = ['id', 'title', 'description', 'image', 'recordings']
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -51,5 +51,5 @@ class RecordSerializerFront(serializers.ModelSerializer):
 
     class Meta:
         model = Record
-        fields = ['id', 'title', 'image',
+        fields = ['id', 'title', 'image', 'description',
                   'audio', 'category', 'author', 'tags']
