@@ -5,7 +5,8 @@ from recordings import views
 router = routers.DefaultRouter()
 router.register(r'recordings-data', views.RecordingsDataView, 'Recordings-Data')
 router.register(r'categories', views.CategoriesView, 'Categories')
-router.register(r'authors', views.AuthorsView, 'Authors')
+router.register(r'authors-data', views.AuthorsView, 'Authors-Data')
+router.register(r'authors', views.AuthorsViewFront, 'Authors')
 router.register(r'tags', views.TagView, 'Tags')
 router.register(r'recordings', views.RecordingsView, 'Recordings')
 

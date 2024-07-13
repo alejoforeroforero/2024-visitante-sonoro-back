@@ -9,6 +9,19 @@ class RecordSerializerData(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class RecordSerializerData2(serializers.ModelSerializer):
+
+    category = serializers.CharField(
+        source='category.title', read_only=True)
+    
+    author = serializers.CharField(
+        source='author.title', read_only=True)
+
+    class Meta:
+        model = Record
+        fields = ['id', 'title', 'author', 'category', 'tags']
+
+
 class CategorySerializer(serializers.ModelSerializer):
     recordings = RecordSerializerData(many=True, read_only=True)
 
@@ -19,6 +32,14 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class AuthorSerializer(serializers.ModelSerializer):
     recordings = RecordSerializerData(many=True, read_only=True)
+
+    class Meta:
+        model = Author
+        fields = ['id', 'title', 'description', 'image', 'recordings']
+
+
+class AuthorSerializerFront(serializers.ModelSerializer):
+    recordings = RecordSerializerData2(many=True, read_only=True)
 
     class Meta:
         model = Author
