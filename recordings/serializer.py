@@ -19,7 +19,7 @@ class RecordSerializerData2(serializers.ModelSerializer):
 
     class Meta:
         model = Record
-        fields = ['id', 'title', 'author', 'category', 'tags']
+        fields = ['id', 'title', 'audio', 'author', 'category', 'tags']
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -73,4 +73,4 @@ class RecordSerializerFront(serializers.ModelSerializer):
     class Meta:
         model = Record
         fields = ['id', 'title', 'image', 'description',
-                  'audio', 'category', 'author', 'tags']
+                  'audio', 'latitude', 'longitude', 'category', 'author', 'tags']
