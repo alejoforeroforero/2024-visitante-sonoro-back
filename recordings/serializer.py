@@ -14,12 +14,15 @@ class RecordSerializerData2(serializers.ModelSerializer):
     category = serializers.CharField(
         source='category.title', read_only=True)
     
+    categorySlug = serializers.CharField(
+        source='category.slug', read_only=True)
+    
     author = serializers.CharField(
         source='author.title', read_only=True)
 
     class Meta:
         model = Record
-        fields = ['id', 'title', 'audio', 'author', 'category', 'tags']
+        fields = ['id', 'title', 'audio', 'author', 'category', 'categorySlug', 'tags']
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -64,6 +67,9 @@ class TagSerializerFront(serializers.ModelSerializer):
 class RecordSerializerFront(serializers.ModelSerializer):
     category = serializers.CharField(
         source='category.title', read_only=True)
+    
+    categorySlug = serializers.CharField(
+        source='category.slug', read_only=True)
 
     author = serializers.CharField(
         source='author.title', read_only=True)
@@ -73,4 +79,4 @@ class RecordSerializerFront(serializers.ModelSerializer):
     class Meta:
         model = Record
         fields = ['id', 'title', 'image', 'description',
-                  'audio', 'latitude', 'longitude', 'category', 'author', 'tags']
+                  'audio', 'latitude', 'longitude', 'category', 'categorySlug', 'author', 'tags']

@@ -11,7 +11,7 @@ router.register(r'authors-data', views.AuthorsView, 'Authors-Data')
 router.register(r'authors', views.AuthorsViewFront, 'Authors')
 router.register(r'tags', views.TagView, 'Tags')
 router.register(r'recordings', views.RecordingsView, 'Recordings')
-router.register(r'music', views.MusicViewSet)
+router.register(r'category', views.MusicViewSet, 'Category')
 
 urlpatterns = [
     path('v1/', include(router.urls)),  
