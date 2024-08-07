@@ -11,12 +11,9 @@ router.register(r'authors', views.AuthorsViewFront, 'Authors')
 router.register(r'tags', views.TagView, 'Tags')
 router.register(r'recordings', views.RecordingsView, 'Recordings')
 router.register(r'category', views.MusicViewSet, 'Category')
-router.register(r'users', views.UserDataView, 'Users')
+# router.register(r'users', views.UserDataView, 'Users')
 
 
 urlpatterns = [
     path('v1/', include(router.urls)),
-    path('signup/', views.SignupView.as_view(), name='signup'),
-    path('signin/', views.SigninView.as_view(), name='signin'),
-    path('signout/', views.SignoutView.as_view(), name='signout'),
 ]

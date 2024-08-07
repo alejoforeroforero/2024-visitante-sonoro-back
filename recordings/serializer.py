@@ -4,23 +4,23 @@ from .models import Record, Category, Author, Tag
 from django.contrib.auth import get_user_model, authenticate
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'password']
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ['id', 'username', 'email', 'password']
 
-class UserLoginSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField()
-    password = serializers.CharField()
+# class UserLoginSerializer(serializers.ModelSerializer):
+#     email = serializers.EmailField()
+#     password = serializers.CharField()
 
-    def check_user(self, clean_data):
-        user = authenticate(username=clean_data['email'], password=[clean_data['password']])
+#     def check_user(self, clean_data):
+#         user = authenticate(username=clean_data['email'], password=[clean_data['password']])
 
-        if not user:
-            # raise ValidationError('user not found')
-            print('no user found')
+#         if not user:
+#             # raise ValidationError('user not found')
+#             print('no user found')
         
-        return user
+#         return user
 
 class RecordSerializerData(serializers.ModelSerializer):
 
