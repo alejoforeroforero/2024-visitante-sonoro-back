@@ -7,6 +7,7 @@ from .views import (
     UserView,
     LogoutView,
     UpdateProfilePictureView,
+    UpdateFavoriteRecordsView,
     GoogleSignInView
 )
 
@@ -17,5 +18,6 @@ urlpatterns = [
     path('user/', UserView.as_view(), name='user'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('update-profile-picture/', UpdateProfilePictureView.as_view(), name='update_profile_picture'),
-    path('google-signin/', GoogleSignInView.as_view(), name='google_signin')
+    path('google-signin/', GoogleSignInView.as_view(), name='google_signin'),
+    path('favorites/', UpdateFavoriteRecordsView.as_view(), name='logout'),
 ]

@@ -16,6 +16,7 @@ from .serializers import (
 )
 from google.oauth2 import id_token
 from google.auth.transport import requests
+from recordings.models import Record
 
 User = get_user_model()
 
@@ -157,8 +158,6 @@ class UserView(APIView):
 
     def get(self, request):
         user = request.user
-        # user = 'alejo1@gmail.com'
-        # return Response({'success': True, 'data': request}, status=status.HTTP_200_OK)
         serializer = ExtendedUserSerializer(user)
         data = serializer.data
         data['profile_picture'] = request.build_absolute_uri(
@@ -179,6 +178,43 @@ class UserView(APIView):
             return Response({'success': True, 'data': data, }, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class UpdateFavoriteRecordsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        record_id = request.data.get('record_id')
+
+        if not record_id:
+            return Response({'success': False, 'message': 'No record id'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            record = Record.objects.get(id=record_id)
+        except Record.DoesNotExist:
+            return Response({'success': False, 'message': 'No record found'}, status=status.HTTP_404_NOT_FOUND)
+
+        user.favorite_records.add(record)
+
+        serializer = ExtendedUserSerializer(user)
+        return Response(serializer.data)
+    
+    def delete(self, request):
+        user = request.user
+        record_id = request.data.get('record_id')
+
+        if not record_id:
+            return Response({'success': False, 'message': 'No record found'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            record = Record.objects.get(id=record_id)
+        except Record.DoesNotExist:
+            return Response({'success': False, 'message': 'No record found'}, status=status.HTTP_404_NOT_FOUND)
+
+        user.favorite_records.remove(record)
+
+        serializer = ExtendedUserSerializer(user)
+        return Response(serializer.data)
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]

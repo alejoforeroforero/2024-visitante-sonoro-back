@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from recordings.models import Record
 
 
 class CustomUser(AbstractUser):
@@ -11,6 +12,7 @@ class CustomUser(AbstractUser):
     birth_date = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=15, blank=True)
     address = models.TextField(blank=True)
+    favorite_records = models.ManyToManyField(Record, related_name='favorited_by')
 
 
     def __str__(self):
