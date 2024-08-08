@@ -203,6 +203,8 @@ class UpdateFavoriteRecordsView(APIView):
         user = request.user
         record_id = request.data.get('record_id')
 
+        print(record_id, 'hola');
+
         if not record_id:
             return Response({'success': False, 'message': 'No record found'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -213,8 +215,8 @@ class UpdateFavoriteRecordsView(APIView):
 
         user.favorite_records.remove(record)
 
-        serializer = ExtendedUserSerializer(user)
-        return Response(serializer.data)
+        return Response({'success': True, 'message': 'Se quita de favoritos'},
+                status=status.HTTP_200_OK)
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
