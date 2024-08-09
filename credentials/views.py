@@ -64,7 +64,6 @@ class GoogleSignInView(APIView):
         token = request.data.get('token')
 
         try:
-            # Verify the Google token
             idinfo = id_token.verify_oauth2_token(
                 token, requests.Request(), settings.GOOGLE_CLIENT_ID)
 
@@ -86,13 +85,10 @@ class GoogleSignInView(APIView):
                     user, data=user_data, partial=True)
 
                 if serializer.is_valid():
-                    # user = serializer.save()
                     refresh = RefreshToken.for_user(user)
                     response = Response({
                         'success': True,
-                        'message': 'Loggin succesfull',
-                        'access': str(refresh.access_token),
-                        'user': serializer.data
+                        'message': 'Inicio de sesión exitoso. Redirigiendo a tu cuenta...',
                     }, status=status.HTTP_200_OK)
                     response.set_cookie(
                         'refresh_token',
@@ -102,7 +98,7 @@ class GoogleSignInView(APIView):
                         secure=True,
                         max_age=24 * 60 * 60
                     )
-                    access_token = response.data['access']
+                    access_token = str(refresh.access_token)
                     response.set_cookie(
                         'access_token',
                         access_token,
@@ -254,7 +250,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         response = super().post(request, *args, **kwargs)
         if response.status_code == 200:
             data = response.data if hasattr(response, 'data') else {}
-            data['message'] = "Login successful! You are now logged in"
+            data['message'] = "Inicio de sesión exitoso. Redirigiendo a tu cuenta..."
             data['success'] = True
 
             refresh_token = response.data['refresh']
@@ -311,7 +307,7 @@ class UpdateProfilePictureView(APIView):
             instance = serializer.save()
             return Response({
                 'success': True,
-                'message': 'Profile picture updated successfully',
+                'message': 'Imagen de perfil actualizada con éxito',
                 'profile_picture': request.build_absolute_uri(instance.profile_picture.url) if instance.profile_picture else None,
             }, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'success': True, 'message': 'Imagen de perfil actualizada con éxito', 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
