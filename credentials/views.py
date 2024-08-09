@@ -28,17 +28,19 @@ class RegisterView(APIView):
         email = request.data.get('email')
 
         if User.objects.filter(email=email).exists():
-            return Response({'success': False, 'message': 'Email already exists'}, status=status.HTTP_200_OK)
+            return Response(
+                {'success': False, 'message': 'El correo ya existe'},
+                status=status.HTTP_409_CONFLICT
+            )
 
         serializer = UserSerializer(data=request.data)
 
         if serializer.is_valid():
-
             user = serializer.save()
             refresh = RefreshToken.for_user(user)
             response = Response({
                 'success': True,
-                'message': 'Check your email for verification',
+                'message': 'El usuario ha sido creado con exito, revisa el correo para confirmar tu cuenta',
                 'access': str(refresh.access_token),
                 'user': serializer.data
             }, status=status.HTTP_201_CREATED)
@@ -198,12 +200,10 @@ class UpdateFavoriteRecordsView(APIView):
 
         serializer = ExtendedUserSerializer(user)
         return Response(serializer.data)
-    
+
     def delete(self, request):
         user = request.user
         record_id = request.data.get('record_id')
-
-        print(record_id, 'hola');
 
         if not record_id:
             return Response({'success': False, 'message': 'No record found'}, status=status.HTTP_400_BAD_REQUEST)
@@ -216,10 +216,10 @@ class UpdateFavoriteRecordsView(APIView):
         user.favorite_records.remove(record)
 
         return Response({'success': True, 'message': 'Se quita de favoritos'},
-                status=status.HTTP_200_OK)
+                        status=status.HTTP_200_OK)
+
 
 class LogoutView(APIView):
-    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:
@@ -239,13 +239,16 @@ class LogoutView(APIView):
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
+    permission_classes = [AllowAny]
+
     def post(self, request, *args, **kwargs):
+
         email = request.data.get('email')
 
         if not User.objects.filter(email=email).exists():
             return Response(
-                {'success': False, 'message': 'The credentials you entered are incorrect. Please try again.'},
-                status=status.HTTP_200_OK
+                {'success': False, 'message': 'No existe un usuario con este correo'},
+                status=status.HTTP_401_UNAUTHORIZED
             )
 
         response = super().post(request, *args, **kwargs)
