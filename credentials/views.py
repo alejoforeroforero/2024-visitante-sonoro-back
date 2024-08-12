@@ -169,11 +169,7 @@ class UserView(APIView):
             user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            data = serializer.data
-            data['profile_picture'] = request.build_absolute_uri(
-                user.profile_picture.url) if user.profile_picture else None
-
-            return Response({'success': True, 'data': data, }, status=status.HTTP_200_OK)
+            return Response({'success': True, 'message': 'Información actualizada con éxito'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -224,7 +220,7 @@ class LogoutView(APIView):
                 token = RefreshToken(refresh_token)
                 token.blacklist()
             response = Response(
-                {"message": "Successfully logged out."}, status=status.HTTP_200_OK)
+                {'success': True, "message": "Has cerrado sesión correctamente"}, status=status.HTTP_200_OK)
             response.delete_cookie('refresh_token')
             response.delete_cookie('access_token')
             return response
@@ -308,6 +304,6 @@ class UpdateProfilePictureView(APIView):
             return Response({
                 'success': True,
                 'message': 'Imagen de perfil actualizada con éxito',
-                'profile_picture': request.build_absolute_uri(instance.profile_picture.url) if instance.profile_picture else None,
+                # 'profile_picture': request.build_absolute_uri(instance.profile_picture.url) if instance.profile_picture else None,
             }, status=status.HTTP_200_OK)
         return Response({'success': True, 'message': 'Imagen de perfil actualizada con éxito', 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
