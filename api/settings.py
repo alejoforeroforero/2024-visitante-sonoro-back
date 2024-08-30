@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 from pathlib import Path
+
+load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lkh)&xg%8lpn)x&2=&h@ou@mn#ozo$!q5f%5%h23^@_b3wiuft'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -61,6 +64,9 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'api.urls'
 
 GOOGLE_CLIENT_ID = '40425782780-tbn9kte2rn355q67jouqs4165vs6shre.apps.googleusercontent.com'
+
+# GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
+# GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
 
 TEMPLATES = [
     {
