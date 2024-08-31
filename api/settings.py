@@ -29,13 +29,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+# DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = True
 
-ALLOWED_HOSTS = ['localhost',
-                 '127.0.0.1',
-                 '68.183.136.243'
-                 ]
+ALLOWED_HOSTS = []
 
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
@@ -67,10 +66,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'api.urls'
 
-GOOGLE_CLIENT_ID = '40425782780-tbn9kte2rn355q67jouqs4165vs6shre.apps.googleusercontent.com'
+# GOOGLE_CLIENT_ID = '40425782780-tbn9kte2rn355q67jouqs4165vs6shre.apps.googleusercontent.com'
 
-# GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
-# GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
 
 TEMPLATES = [
     {
@@ -150,9 +149,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ]
 }
 
 
@@ -199,20 +195,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:5173',
-                        'http://192.168.0.103:5173', 'http://68.183.136.243', 'http://68.183.136.243:90', 'http://68.183.136.243:8000']
-
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
-
-SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
-
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = 31536000  # 1 año
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Your React app's URL
+]
