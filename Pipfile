@@ -6,6 +6,15 @@ name = "pypi"
 [packages]
 django = "==4.1.7"
 pylint-django = "*"
+python-dotenv = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+djangorestframework-simplejwt = "*"
+pillow = "*"
+google-auth-oauthlib = "*"
+django-filter = "*"
+mutagen = "*"
+typing-extensions = "*"
 
 [dev-packages]
 

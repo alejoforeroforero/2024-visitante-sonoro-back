@@ -1,13 +1,8 @@
 services:
-  backend:
+  web:
     build: .
+    command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
-    volumes:
-      - ./backend:/app
-    environment:
-      - DEBUG=1
-      - SECRET_KEY=${DJANGO_SECRET_KEY}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - .env
