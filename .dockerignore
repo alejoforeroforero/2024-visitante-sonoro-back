@@ -1,23 +1,105 @@
-*.pyc
-*.pyo
-*.mo
-*.db
-*.css.map
-*.egg-info
-*.sql.gz
-.cache
-.project
-.idea
-.pydevproject
-.idea/workspace.xml
-.DS_Store
-.git/
+# Git
+.git
 .gitignore
-.env
+
+# Python
+*.py[cod]
+__pycache__
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+htmlcov
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Sphinx
+docs/_build
+
+# Virtual environment
+venv
 .venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-staticfiles
+env
+
+# Database
+*.sqlite3
+
+# IDE specific files
+.vscode
+.idea
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Django static and media files (if served outside of container)
+/static
+/media
+
+# Local development settings
+local_settings.py
+
+# Logs
+*.log
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Environment variables file
+.env
+
+# Node modules (if you're using any JavaScript tools)
+node_modules
+
+# Python bytecode
+*.pyc
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Other
+*.bak
+*.tmp
