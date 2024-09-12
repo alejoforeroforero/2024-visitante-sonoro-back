@@ -26,14 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.getenv('DEBUG', 'False') == 'True'
-DEBUG = True  # Temporarily for troubleshooting
+DEBUG = DEBUG = os.getenv('DJANGO_DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['68.183.136.243', 'localhost', '127.0.0.1', 'cocinasitinerantes.com', 'www.cocinasitinerantes.com']
-
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS').split(',')
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
@@ -66,10 +65,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'api.urls'
 
-# GOOGLE_CLIENT_ID = '40425782780-tbn9kte2rn355q67jouqs4165vs6shre.apps.googleusercontent.com'
 
-GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
-GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
+GOOGLE_CLIENT_ID = os.getenv('DJANGO_GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = os.getenv('DJANGO_GOOGLE_CLIENT_SECRET')
 
 TEMPLATES = [
     {
@@ -194,6 +192,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://cocinasitinerantes.com:8444',
+    # Add any other trusted origins here
+]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",

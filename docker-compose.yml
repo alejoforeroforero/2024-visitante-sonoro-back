@@ -1,17 +1,13 @@
 services:
   web:
     build: .
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
-    env_file:
-      - .env
-
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
       - "8000:8000"
-    depends_on:
-      - web
+    env_file:
+      - .env
+    environment:
+      - DEBUG=1
+      - DATABASE_URL=sqlite:///db.sqlite3
