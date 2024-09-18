@@ -194,8 +194,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://cocinasitinerantes.com:8444',
-    # Add any other trusted origins here
+    'https://visitantesonoroapi.cocinasitinerantes.com',
+    'http://visitantesonoroapi.cocinasitinerantes.com',
 ]
 
 CORS_ALLOWED_ORIGINS = [

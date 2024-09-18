@@ -5,5 +5,8 @@ services:
       - "8083:8000"
     volumes:
       - .:/app
+    env_file:
+      - .env
     environment:
-      - DEBUG=0
+      - DEBUG=1
+      - DATABASE_URL=sqlite:///db.sqlite3
