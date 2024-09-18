@@ -1,13 +1,9 @@
 services:
-  web:
+  django-app:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8083:8000"
     volumes:
       - .:/app
-    ports:
-      - "8000:8000"
-    env_file:
-      - .env
     environment:
-      - DEBUG=1
-      - DATABASE_URL=sqlite:///db.sqlite3
+      - DEBUG=0
