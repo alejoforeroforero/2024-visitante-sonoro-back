@@ -2,7 +2,7 @@ services:
   django-app:
     build: .
     ports:
-      - "8080:8000"
+      - "8083:8000"
     volumes:
       - .:/app
     env_file:
