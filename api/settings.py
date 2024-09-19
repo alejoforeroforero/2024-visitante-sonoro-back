@@ -196,6 +196,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS = [
     'https://visitantesonoroapi.cocinasitinerantes.com',
     'http://visitantesonoroapi.cocinasitinerantes.com',
+    'https://visitantesonoro.cocinasitinerantes.com',
 ]
 
 CORS_ALLOWED_ORIGINS = [
