@@ -254,7 +254,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 'refresh_token',
                 refresh_token,
                 httponly=True,
-                samesite='Strict',
+                samesite='None',
                 secure=True,
                 max_age=24 * 60 * 60
             )
