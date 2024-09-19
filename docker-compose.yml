@@ -5,8 +5,14 @@ services:
       - "8083:8000"
     volumes:
       - .:/app
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
     env_file:
       - .env
     environment:
       - DEBUG=1
       - DATABASE_URL=sqlite:///db.sqlite3
+
+volumes:
+  static_volume:
+  media_volume:
