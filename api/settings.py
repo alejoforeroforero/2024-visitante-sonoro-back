@@ -133,8 +133,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
+DJANGO_BASE_DOMAIN = os.environ.get('DJANGO_BASE_DOMAIN', 'localhost:8000')
+DJANGO_PROTOCOL = os.environ.get('DJANGO_PROTOCOL', 'https' if not DEBUG else 'http')
+
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_URL = '/static/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = f'{DJANGO_PROTOCOL}://{DJANGO_BASE_DOMAIN}/media/'
+STATIC_URL = f'{DJANGO_PROTOCOL}://{DJANGO_BASE_DOMAIN}/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -189,8 +202,7 @@ AUTHENTICATION_BACKENDS = [
 # AUTH_USER_MODEL = 'recordings.CustomUser'
 AUTH_USER_MODEL = 'credentials.CustomUser'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 
